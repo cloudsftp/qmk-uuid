@@ -1,5 +1,7 @@
 #include "uuid.h"
 
+#include <stdio.h>
+
 const char hex_symbols[] = {
     '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
     'a', 'b', 'c', 'd', 'e', 'f',
@@ -44,11 +46,13 @@ void write_uuid_byte(
     unsigned short int value,
     unsigned short int position
 ) {
-    unsigned short int first = value & 0xf;
+    unsigned short int first = value >> 4;
     uuid_string[position] = hex_symbols[first];
+    printf("(f: %2d, ", first);
 
-    unsigned short int second = value >> 4;
+    unsigned short int second = value & 0xf;
     uuid_string[position + 1] = hex_symbols[second];
+    printf("s: %2d), ", second);
 }
 
 void write_uuid_uint(
@@ -56,11 +60,15 @@ void write_uuid_uint(
     unsigned int value,
     unsigned short int position
 ) {
-    unsigned short int first = value & 0xff;
+    printf("write uint: ");
+    unsigned short int first = (value >> 8) & 0xff;
+    printf("first: %4d ", first);
     write_uuid_byte(uuid_string, first, position);
 
-    unsigned short int second = value >> 8;
+    unsigned short int second = value & 0xff;
+    printf("second: %4d", second);
     write_uuid_byte(uuid_string, second, position + 2);
+    printf("\n");
 }
 
 void uuid_to_string(char* uuid_string, uuid_t uuid) {
@@ -70,6 +78,13 @@ void uuid_to_string(char* uuid_string, uuid_t uuid) {
         char chars = uuid_char_groups[group];
 
         for (int i = 0; i < chars; i += 4) {
+            printf(
+                "uuid pos: %2d, string pos: %2d, string: %s\n",
+                current,
+                string_pos,
+                uuid_string
+            );
+
             write_uuid_uint(
                 uuid_string,
                 uuid.parts[current],
