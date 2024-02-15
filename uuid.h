@@ -8,7 +8,7 @@
 #define UUID_NUM_BYTES  UUID_NUM_BITS / 8
 #define UUID_NUM_UINTS  UUID_NUM_BYTES / 2
 
-#define UUID_STR_LEN            2 * UUID_NUM_BYTES + 5 + 1
+#define UUID_STR_LEN            2 * UUID_NUM_BYTES + 4
 #define UUID_NUM_CHAR_GROUPS    5
 
 typedef struct uuid_t {
