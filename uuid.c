@@ -10,8 +10,8 @@ const char uuid_char_groups[UUID_NUM_CHAR_GROUPS] = {
 };
 
 
-char* random_uuid_string(void) {
-    uuid_t uuid = generate_uuid();
+char* random_uuid_string(unsigned int seed) {
+    uuid_t uuid = generate_uuid(seed);
 
     char* result = malloc(UUID_STR_LEN);
     uuid_to_string(result, uuid);
@@ -19,9 +19,8 @@ char* random_uuid_string(void) {
     return result;
 }
 
-uuid_t generate_uuid(void) {
-    time_t t;
-    srand((unsigned) time(&t));
+uuid_t generate_uuid(unsigned int seed) {
+    srand(seed);
 
     uuid_t uuid;
     for (int i = 0; i < UUID_NUM_UINTS; i++) {

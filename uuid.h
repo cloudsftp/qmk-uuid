@@ -15,9 +15,9 @@ typedef struct uuid_t {
     unsigned int parts[UUID_NUM_UINTS];
 } uuid_t;
 
-char* random_uuid_string(void);
+char* random_uuid_string(unsigned int seed);
 
-uuid_t generate_uuid(void);
+uuid_t generate_uuid(unsigned int seed);
 void uuid_to_string(char* uuid_string, uuid_t uuid);
 
 // internals
