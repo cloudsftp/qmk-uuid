@@ -80,7 +80,7 @@ void uuid_to_string(char* uuid_string, uuid_t uuid) {
             string_pos += 4;
         }
 
-        uuid_string[string_pos++] = '-';
+        uuid_string[string_pos++] = '/';
     }
     uuid_string[UUID_STR_LEN-1] = 0;
 }
