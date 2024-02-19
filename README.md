@@ -29,6 +29,17 @@ free(your_uuid);
 
 ### QMK
 
+Some QMK specific usage instructions and tips.
+
+### Installation / Setup
+
+1. Clone this library somewhere.
+   I would suggest `~/qmk_firmware/keyboards/uuid`
+2. Add that path to the `rules.mk` of the keymap you want to add this feature to.
+   Like this: `SRC += uuid/uuid.c`
+
+### Calling the library
+
 I am using it for a custom key event to send out the UUID string.
 See [this documentation](https://github.com/qmk/qmk_firmware/blob/master/docs/feature_macros.md#using-macros-in-c-keymaps) about macros.
 
@@ -47,6 +58,8 @@ void output_uuid(keyrecord_t *record) {
     free(uuid_string);
 }
 ```
+
+### Getting Entropy
 
 I am using the [timer provided by TMK](https://github.com/tmk/tmk_keyboard/blob/master/tmk_core/common/timer.h).
 It might be available for your keyboard too - no guarantee.
