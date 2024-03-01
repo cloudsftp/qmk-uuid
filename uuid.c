@@ -81,6 +81,6 @@ void uuid_to_string(char* uuid_string, uuid_t uuid) {
 
         uuid_string[string_pos++] = '/';
     }
-    uuid_string[UUID_STR_LEN-1] = 0;
+    uuid_string[string_pos-1] = 0;
 }
 
